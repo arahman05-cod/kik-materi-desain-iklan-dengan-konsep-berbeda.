@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduCraft - Media Pembelajaran Desain Iklan & E-Commerce</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        signature: ['Caveat', 'cursive'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            500: '#4f46e5',
+                            600: '#4338ca',
+                            700: '#3730a3',
+                            900: '#1e1b4b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printable-certificate, #printable-certificate * {
+                visibility: visible;
+            }
+            #printable-certificate {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
+                padding: 20px;
+                box-shadow: none !important;
+                border: 8px solid #3730a3 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+
+    <!-- TOP NAVIGATION HEADER -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-slate-900 text-lg leading-tight">EduAd & E-Com Lab</h1>
+                    <p class="text-xs text-slate-500 font-medium">Media Pembelajaran Interaktif Desain & Strategi</p>
+                </div>
+            </div>
+
+            <!-- Global Progress Tracker Header -->
+            <div class="hidden md:flex items-center space-x-6">
+                <div class="flex items-center space-x-3 bg-slate-100 px-4 py-1.5 rounded-full border border-slate-200">
+                    <span class="text-xs font-semibold text-slate-600">Progres Pembelajaran:</span>
+                    <div class="w-32 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                        <div id="header-progress-bar" class="bg-emerald-600 h-2.5 rounded-full transition-all duration-500" style="width: 25%"></div>
+                    </div>
+                    <span id="header-progress-text" class="text-xs font-bold text-emerald-600">25%</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN APP CONTAINER -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-grow flex flex-col md:flex-row gap-6">
+
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="w-full md:w-64 flex-shrink-0 no-print">
+            <nav class="bg-white rounded-2xl p-3 border border-slate-200 shadow-sm space-y-1 sticky top-22">
+                <button onclick="switchTab('bacaan')" id="nav-bacaan" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all bg-brand-50 text-brand-700 shadow-sm">
+                    <i class="fa-solid fa-book-open text-brand-600"></i>
+                    <span>Modul Bacaan</span>
+                </button>
+                <button onclick="switchTab('simulator')" id="nav-simulator" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-[#4338ca] fa-laptop-code text-slate-500"></i>
+                    <span>Workstation Praktik</span>
+                </button>
+                <button onclick="switchTab('kuis')" id="nav-kuis" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-pen-to-square text-slate-500"></i>
+                    <span>Kuis Evaluasi</span>
+                </button>
+                <button onclick="switchTab('sertifikat')" id="nav-sertifikat" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-semibold text-sm transition-all text-slate-600 hover:bg-slate-100">
+                    <i class="fa-solid fa-award text-slate-500"></i>
+                    <span>Sertifikat Kelulusan</span>
+                </button>
+            </nav>
+
+            <!-- Student Profile Mini Card -->
+            <div class="mt-6 bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-2xl p-4 shadow-sm">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-indigo-500/30 border border-indigo-400/40 flex items-center justify-center font-bold text-indigo-200">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs text-indigo-300 font-medium">Siswa / Peserta</p>
+                        <input type="text" id="student-name-sidebar" oninput="syncStudentName(this.value)" value="Budi Pratama" class="bg-transparent border-b border-indigo-500/50 text-sm font-bold focus:outline-none focus:border-indigo-300 w-full text-white" placeholder="Masukkan Nama Anda">
+                    </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-indigo-800/60 text-xs flex justify-between text-indigo-300">
+                    <span>Skor Kuis: <strong id="sidebar-quiz-score" class="text-white">0%</strong></span>
+                    <span>Skor Praktik: <strong id="sidebar-sim-score" class="text-white">0%</strong></span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-grow">
+
+            <!-- TAB 1: MODUL BACAAN -->
+            <section id="tab-bacaan" class="tab-content block space-y-6">
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                        <div>
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700 mb-2">Konsep Dasar & Praktik</span>
+                            <h2 class="text-2xl font-bold text-slate-900">Modul 1: Strategi Desain Iklan & E-Commerce</h2>
+                            <p class="text-sm text-slate-500 mt-1">Pelajari prinsip utama merancang iklan unik hingga optimasi konversi e-commerce.</p>
+                        </div>
+                    </div>
+
+                    <!-- Topics Accordion / Tabs -->
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="md:col-span-1 space-y-2">
+                            <button onclick="showTopic(1)" id="topic-btn-1" class="topic-btn w-full text-left p-3 rounded-xl text-xs font-bold transition-all bg-brand-600 text-white shadow-sm">
+                                1. Direct Response & Hook
+                            </button>
+                            <button onclick="showTopic(2)" id="topic-btn-2" class="topic-btn w-full text-left p-3 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200">
+                                2. Segmentasi Target Audiens
+                            </button>
+                            <button onclick="showTopic(3)" id="topic-btn-3" class="topic-btn w-full text-left p-3 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200">
+                                3. Struktur Produk E-Commerce
+                            </button>
+                            <button onclick="showTopic(4)" id="topic-btn-4" class="topic-btn w-full text-left p-3 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200">
+                                4. Analisis Data Kampanye
+                            </button>
+                            <button onclick="showTopic(5)" id="topic-btn-5" class="topic-btn w-full text-left p-3 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-700 hover:bg-slate-200">
+                                5. Strategi Optimasi Pembelian
+                            </button>
+                        </div>
+
+                        <!-- Topic Content Display Panel -->
+                        <div class="md:col-span-3 bg-slate-50 p-6 rounded-xl border border-slate-200 custom-scrollbar max-h-[500px] overflow-y-auto">
+                            
+                            <!-- Topic 1 -->
+                            <div id="topic-content-1" class="topic-content space-y-4">
+                                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                    <span>🎯</span> Formula Formulasi Desain Iklan Unik (Hook-Story-Offer)
+                                </h3>
+                                <p class="text-sm leading-relaxed text-slate-600">
+                                    Iklan modern di era <em>attention economy</em> membutuhkan teknik <strong>Pattern Interrupt</strong> untuk menghentikan guliran (scroll) pengguna di media sosial dalam 3 detik pertama.
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 my-4">
+                                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+                                        <div class="text-brand-600 font-extrabold text-lg mb-1">1. HOOK</div>
+                                        <p class="text-xs text-slate-500">Visual atau teks kejutan yang menghentikan scroll pengguna (Visual disrupt/kontras tinggi).</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+                                        <div class="text-brand-600 font-extrabold text-lg mb-1">2. STORY</div>
+                                        <p class="text-xs text-slate-500">Menghubungkan masalah (pain points) calon pembeli dengan narasi empati yang relevan.</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+                                        <div class="text-brand-600 font-extrabold text-lg mb-1">3. OFFER</div>
+                                        <p class="text-xs text-slate-500">Penawaran jernih, solutif, dan sulit ditolak dengan Call-To-Action (CTA) tegas.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-900">
+                                    <strong>Tips Desainer:</strong> Jangan buat iklan yang hanya sekadar 'indah'. Buatlah iklan yang berorientasi <em>Direct Response</em>: langsung menggerakkan emosi atau rasa ingin tahu audiens.
+                                </div>
+                            </div>
+
+                            <!-- Topic 2 -->
+                            <div id="topic-content-2" class="topic-content hidden space-y-4">
+                                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                    <span>👥</span> Penentuan Target Audiens (Demografi & Psikografi)
+                                </h3>
+                                <p class="text-sm leading-relaxed text-slate-600">
+                                    Desain iklan yang sukses berakar dari pemahaman mendalam terhadap audiens sasaran. Audiens dibagi dalam 2 dimensi utama:
+                                </p>
+                                <ul class="list-disc pl-5 text-sm text-slate-600 space-y-2">
+                                    <li><strong>Demografi:</strong> Usia, jenis kelamin, lokasi geografis, profesi, dan tingkat pendapatan.</li>
+                                    <li><strong>Psikografi:</strong> Nilai-nilai hidup, gaya hidup, ketakutan/masalah (Pain Points), serta impian/keinginan (Desires).</li>
+                                </ul>
+                                <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-900">
+                                    💡 <strong>Contoh Kasus:</strong> Sepatu Kerja Ergonomis.<br>
+                                    • <em>Pain Point:</em> Kaki sering pegal dan sakit tumit setelah berdiri lama di kantor.<br>
+                                    • <em>Desire:</em> Sepatu yang terlihat elegan & profesional namun senyaman sepatu olahraga.
+                                </div>
+                            </div>
+
+                            <!-- Topic 3 -->
+                            <div id="topic-content-3" class="topic-content hidden space-y-4">
+                                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                    <span>🛒</span> Anatomi Halaman Produk E-Commerce Berkonversi Tinggi
+                                </h3>
+                                <p class="text-sm leading-relaxed text-slate-600">
+                                    Saat pengunjung mengklik iklan dan masuk ke toko online, halaman produk (Landing Page) bertanggung jawab mengubah pengunjung menjadi pembeli.
+                                </p>
+                                <div class="space-y-2 text-xs text-slate-700">
+                                    <div class="bg-white p-3 rounded-lg border border-slate-200 flex items-center gap-3">
+                                        <span class="bg-emerald-100 text-emerald-700 font-bold px-2 py-1 rounded">Visual Hierarchy</span>
+                                        <span>Hero Image utama yang jelas dengan variasi sudut pandang produk yang berkualitas tinggi.</span>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg border border-slate-200 flex items-center gap-3">
+                                        <span class="bg-emerald-100 text-emerald-700 font-bold px-2 py-1 rounded">Social Proof</span>
+                                        <span>Testimoni pelanggan, badge bintang rating (4.8/5.0), serta jumlah item terjual.</span>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg border border-slate-200 flex items-center gap-3">
+                                        <span class="bg-emerald-100 text-emerald-700 font-bold px-2 py-1 rounded">Urgency & Scarcity</span>
+                                        <span>Penanda stok terbatas ("Sisa 5 pcs") atau penghitung waktu mundur promosi.</span>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg border border-slate-200 flex items-center gap-3">
+                                        <span class="bg-emerald-100 text-emerald-700 font-bold px-2 py-1 rounded">Trust Badges</span>
+                                        <span>Jaminan Garansi 100% Uang Kembali & Layanan Pembayaran COD (Bayar di Tempat).</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Topic 4 -->
+                            <div id="topic-content-4" class="topic-content hidden space-y-4">
+                                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                    <span>📊</span> Metrik Evaluasi Data Kampanye Digital
+                                </h3>
+                                <p class="text-sm leading-relaxed text-slate-600">
+                                    Seorang pemasar digital harus bisa membaca data untuk menemukan letak "kebocoran" dalam corong pemasaran (marketing funnel).
+                                </p>
+                                <div class="grid grid-cols-2 gap-3 text-xs">
+                                    <div class="bg-white p-3 rounded-xl border border-slate-200">
+                                        <div class="font-bold text-slate-800">CTR (Click-Through Rate)</div>
+                                        <div class="text-slate-500 mt-1">Mengukur seberapa menarik desain iklan Anda. (Standard Baik: > 1.5% - 2%)</div>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-xl border border-slate-200">
+                                        <div class="font-bold text-slate-800">CR (Conversion Rate)</div>
+                                        <div class="text-slate-500 mt-1">Persentase pengunjung halaman produk yang akhirnya beli. (Standard Baik: > 2% - 3%)</div>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-xl border border-slate-200">
+                                        <div class="font-bold text-slate-800">CPC (Cost Per Click)</div>
+                                        <div class="text-slate-500 mt-1">Biaya yang dikeluarkan untuk setiap klik iklan.</div>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-xl border border-slate-200">
+                                        <div class="font-bold text-slate-800">ROAS (Return on Ad Spend)</div>
+                                        <div class="text-slate-500 mt-1">Rasio pendapatan dibanding biaya iklan. (Target ROAS ideal > 2.0x - 3.0x)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Topic 5 -->
+                            <div id="topic-content-5" class="topic-content hidden space-y-4">
+                                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                    <span>🚀</span> Strategi Optimasi Pembelian & Conversion Rate (CRO)
+                                </h3>
+                                <p class="text-sm leading-relaxed text-slate-600">
+                                    Jika CTR tinggi namun Conversion Rate rendah, masalahnya ada pada halaman toko online Anda. Berikut solusi konkretnya:
+                                </p>
+                                <ul class="list-disc pl-5 text-sm text-slate-600 space-y-2">
+                                    <li><strong>Risk Reversal:</strong> Kurangi rasa ragu pembeli dengan menawarkan Garansi Bebas Pengembalian 30 Hari.</li>
+                                    <li><strong>Frictionless Checkout:</strong> Sederhanakan formulir pemesanan, tampilkan pilihan opsi bayar cepat & COD.</li>
+                                    <li><strong>Value Bundling:</strong> Berikan penawaran hemat beli 2 gratis 1 untuk meningkatkan total penjualan (AOV).</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex justify-end">
+                        <button onclick="markModuleRead()" class="bg-brand-600 hover:bg-brand-700 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-md transition-all flex items-center gap-2">
+                            <span>Selesaikan Modul Bacaan</span>
+                            <span>→</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: SIMULATOR & WORKSTATION PRAKTIK -->
+            <section id="tab-simulator" class="tab-content hidden space-y-6">
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+                        <div>
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 mb-2"><i class="fa-solid fa-microchip me-1"></i> Simulasi Interaktif</span>
+                            <h2 class="text-2xl font-bold text-slate-900">Workstation Praktik E-Commerce & Kampanye</h2>
+                            <p class="text-sm text-slate-500 mt-1">Studi Kasus: Peluncuran Iklan Produk <strong>"Sepatu Casual Eco-Friendly Daur Ulang"</strong>!</p>
+                        </div>
+                        <!-- Step Indicator -->
+                        <div class="flex items-center space-x-2 bg-slate-100 p-2 rounded-xl text-xs font-bold">
+                            <span id="sim-step-badge-1" class="px-3 py-1.5 rounded-lg bg-brand-600 text-white">Step 1: Audiens Target</span>
+                            <span id="sim-step-badge-2" class="px-3 py-1.5 rounded-lg text-slate-500">Step 2: Live Builder</span>
+                            <span id="sim-step-badge-3" class="px-3 py-1.5 rounded-lg text-slate-500">Step 3: Analisis Data</span>
+                            <span id="sim-step-badge-4" class="px-3 py-1.5 rounded-lg text-slate-500">Step 4: Rekomendasi CRO</span>
+                        </div>
+                    </div>
+
+                    <!-- STEP 1: AUDIENS TARGETING -->
+                    <div id="sim-step-1" class="sim-step-panel mt-6 space-y-6">
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-emerald-900 flex items-start gap-3">
+                            <i class="fa-solid fa-leaf text-emerald-600 text-lg mt-0.5"></i>
+                            <div>
+                                <strong>Objektif Produk Unik:</strong> Sepatu sneakers casual yang diproduksi 100% dari limbah plastik daur ulang samudra dengan desain minimalis modern dan teknologi insole antibakteri yang nyaman.
+                            </div>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-slate-800">Langkah 1: Tentukan Target Audiens Yang Paling Tepat</h3>
+                        <p class="text-sm text-slate-600">Pilih profil segmen pelanggan sasaran utama untuk produk sepatu casual eco-friendly ini:</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="audience_choice" value="wrong1" class="peer hidden" onchange="updateSimAudienceChoice('wrong1')">
+                                <div class="p-5 rounded-2xl border-2 border-slate-200 peer-checked:border-emerald-600 peer-checked:bg-emerald-50/50 transition-all h-full flex flex-col justify-between">
+                                    <div>
+                                        <div class="text-2xl mb-2 text-slate-700"><i class="fa-solid fa-child-reaching"></i></div>
+                                        <h4 class="font-bold text-slate-900 text-sm">Profil A: Pelajar SD/SMP (Usia 8-14 Thn)</h4>
+                                        <p class="text-xs text-slate-500 mt-2">Menyukai sepatu warna-warni kartun, dibelikan oleh orang tua, tidak peduli isu lingkungan.</p>
+                                    </div>
+                                    <span class="mt-4 text-[10px] uppercase font-bold text-slate-400">Segmen Generik</span>
+                                </div>
+                            </label>
+
+                            <label class="cursor-pointer">
+                                <input type="radio" name="audience_choice" value="correct" class="peer hidden" onchange="updateSimAudienceChoice('correct')">
+                                <div class="p-5 rounded-2xl border-2 border-slate-200 peer-checked:border-emerald-600 peer-checked:bg-emerald-50/50 transition-all h-full flex flex-col justify-between">
+                                    <div>
+                                        <div class="text-2xl mb-2 text-emerald-600"><i class="fa-solid fa-seedling"></i></div>
+                                        <h4 class="font-bold text-slate-900 text-sm">Profil B: Gen-Z & Millennial Peduli Lingkungan (20-35 Thn)</h4>
+                                        <p class="text-xs text-slate-500 mt-2">Aktif di perkotaan, menyukai gaya fashion casual/minimalis, dan rela membayar lebih untuk produk ramah lingkungan (Eco-Conscious Buyers).</p>
+                                    </div>
+                                    <span class="mt-4 text-[10px] uppercase font-bold text-emerald-600">Segmen Utama Ideal</span>
+                                </div>
+                            </label>
+
+                            <label class="cursor-pointer">
+                                <input type="radio" name="audience_choice" value="wrong2" class="peer hidden" onchange="updateSimAudienceChoice('wrong2')">
+                                <div class="p-5 rounded-2xl border-2 border-slate-200 peer-checked:border-emerald-600 peer-checked:bg-emerald-50/50 transition-all h-full flex flex-col justify-between">
+                                    <div>
+                                        <div class="text-2xl mb-2 text-slate-700"><i class="fa-solid fa-hard-hat"></i></div>
+                                        <h4 class="font-bold text-slate-900 text-sm">Profil C: Pekerja Sektor Konstruksi Berat</h4>
+                                        <p class="text-xs text-slate-500 mt-2">Membutuhkan sepatu boots baja tahan benturan keras untuk medan berat.</p>
+                                    </div>
+                                    <span class="mt-4 text-[10px] uppercase font-bold text-slate-400">Tidak Mismatch</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div id="sim-audience-feedback" class="hidden p-4 rounded-xl text-sm font-medium"></div>
+
+                        <div class="flex justify-end">
+                            <button onclick="goToSimStep(2)" class="bg-emerald-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-sm hover:bg-emerald-700 flex items-center gap-2">
+                                <span>Lanjut ke Live Builder</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: E-COMMERCE LIVE BUILDER -->
+                    <div id="sim-step-2" class="sim-step-panel hidden mt-6 space-y-6">
+                        <h3 class="text-lg font-bold text-slate-800">Langkah 2: Rakit Halaman Produk E-Commerce</h3>
+                        <p class="text-sm text-slate-600">Atur elemen visual dan nilai jualan utama produk sepatu eco-friendly di panel customizer:</p>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                            <!-- Controls Panel -->
+                            <div class="lg:col-span-5 bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Theme Visual Style (Tampilan)</label>
+                                    <select id="builder-style" onchange="renderLivePreview()" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500">
+                                        <option value="eco">Eco-Green Minimalist (Clean & Nature)</option>
+                                        <option value="bold">Bold Urban Dark (Modern & Trendy)</option>
+                                        <option value="clean">Simple White Clean (Minimalis)</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Headline Hook Iklan / Banner</label>
+                                    <select id="builder-headline" onchange="renderLivePreview()" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500">
+                                        <option value="Tampil Stylish Sekaligus Selamatkan Samudra: Sepatu 100% Eco-Recycled!">"Tampil Stylish Sekaligus Selamatkan Samudra: Sepatu 100% Eco-Recycled!" (Unik & Value)</option>
+                                        <option value="Jual Sepatu Casual Kets Santai Murah Meriah">"Jual Sepatu Casual Kets Santai Murah Meriah" (Generik/Biasa)</option>
+                                        <option value="Diskon Besar Sepatu Pria Dan Wanita Promo Hari Ini">"Diskon Besar Sepatu Pria Dan Wanita Promo Hari Ini" (Kurang Unik)</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Scarcity & Urgency Banner</label>
+                                    <select id="builder-urgency" onchange="renderLivePreview()" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500">
+                                        <option value="active">Aktifkan Flash Sale: Batch Daur Ulang Terbatas (Sisa 9 Pasang)</option>
+                                        <option value="none">Tanpa Banner Urgent</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Trust Badges & Social Proof</label>
+                                    <select id="builder-trust" onchange="renderLivePreview()" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500">
+                                        <option value="full">⭐ 4.9/5 (850+ Ulasan Eco-Friendly) + Garansi Tukar Size + COD</option>
+                                        <option value="minimal">Hanya Rating Star ⭐ 4.2</option>
+                                        <option value="none">Tanpa Social Proof</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Call-To-Action (Tombol Pembelian)</label>
+                                    <select id="builder-cta" onchange="renderLivePreview()" class="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500">
+                                        <option value="Pesan Sekarang - Bebas Risiko (Garansi Tukar Size 30 Hari)">"Pesan Sekarang - Bebas Risiko (Garansi Tukar Size)"</option>
+                                        <option value="Tanyakan Stok">"Tanyakan Stok Chat"</option>
+                                        <option value="Beli Sepatu">"Beli Sepatu"</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Live Product Page Mockup Preview -->
+                            <div id="preview-wrapper" class="lg:col-span-7 bg-slate-900 p-4 rounded-2xl border border-slate-800 text-white shadow-xl transition-all">
+                                <div class="flex items-center space-x-2 pb-3 border-b border-slate-800 text-xs text-slate-400">
+                                    <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                                    <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                                    <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                                    <span class="ml-2 font-mono text-[11px]">https://ecostep-official.com/products/casual-recycled</span>
+                                </div>
+
+                                <!-- Dynamic Preview Canvas -->
+                                <div id="preview-card-bg" class="mt-4 bg-white text-slate-900 rounded-xl p-4 space-y-4 transition-all">
+                                    <!-- Banner Urgency -->
+                                    <div id="preview-urgency-bar" class="bg-emerald-600 text-white text-xs font-bold py-1.5 px-3 rounded-md flex justify-between items-center shadow-xs">
+                                        <span><i class="fa-solid fa-stopwatch me-1"></i> BATCH DAUR ULANG #04 HAMPIR HABIS</span>
+                                        <span>Tersisa 9 Pasang!</span>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div class="bg-slate-100 rounded-xl p-6 flex flex-col items-center justify-center border border-slate-200 relative">
+                                            <span class="absolute top-2 left-2 bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full"><i class="fa-solid fa-leaf me-1"></i> 100% Recycled</span>
+                                            <div class="text-5xl my-4 text-emerald-700"><i class="fa-solid fa-shoe-prints"></i></div>
+                                            <span class="text-[11px] text-slate-400 font-medium">EcoStep Casual Runner</span>
+                                        </div>
+                                        <div class="space-y-2">
+                                            <div id="preview-trust-badge" class="flex items-center space-x-1 text-xs text-amber-500 font-bold">
+                                                ★★★★★ <span class="text-slate-500 font-normal">(850 Ulasan Terverifikasi)</span>
+                                            </div>
+                                            <h4 id="preview-headline" class="font-extrabold text-sm sm:text-base leading-snug text-slate-900">
+                                                Tampil Stylish Sekaligus Selamatkan Samudra: Sepatu 100% Eco-Recycled!
+                                            </h4>
+                                            <div class="flex items-baseline space-x-2">
+                                                <span class="text-lg font-extrabold text-emerald-700">Rp 459.000</span>
+                                                <span class="text-xs text-slate-400 line-through">Rp 799.000</span>
+                                            </div>
+                                            <button id="preview-cta-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 px-3 rounded-lg shadow-md transition-all">
+                                                Pesan Sekarang - Bebas Risiko (Garansi Tukar Size 30 Hari)
+                                            </button>
+                                            <div id="preview-badges-footer" class="text-[10px] text-slate-500 flex items-center justify-between pt-2 border-t border-slate-100">
+                                                <span><i class="fa-solid fa-shield-halved text-emerald-600 me-1"></i> Garansi 30 Hari</span>
+                                                <span><i class="fa-solid fa-truck-fast text-emerald-600 me-1"></i> COD Tersedia</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between pt-4">
+                            <button onclick="goToSimStep(1)" class="bg-slate-200 text-slate-700 px-5 py-2 rounded-xl text-xs font-bold">← Kembali</button>
+                            <button onclick="runSimulatedCampaign()" class="bg-emerald-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-sm hover:bg-emerald-700 flex items-center gap-2">
+                                <span>Jalankan Simulasi Kampanye</span>
+                                <i class="fa-solid fa-chart-line"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: ANALISIS DATA KAMPANYE SIMULASI -->
+                    <div id="sim-step-3" class="sim-step-panel hidden mt-6 space-y-6">
+                        <h3 class="text-lg font-bold text-slate-800">Langkah 3: Dashboard Hasil Analisis Data Iklan</h3>
+                        <p class="text-sm text-slate-600">Simulasi Kampanye Iklan Sepatu Eco-Friendly berjalan 7 hari dengan budget <strong>Rp 1.500.000</strong>. Analisis metrik kinerjanya:</p>
+
+                        <!-- Visual Metrics Bar Chart Simulation -->
+                        <div class="bg-slate-900 text-white p-6 rounded-2xl border border-slate-800 space-y-4">
+                            <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                                <span class="text-xs font-bold text-slate-300 uppercase tracking-wider"><i class="fa-solid fa-chart-bar text-emerald-400 me-2"></i> Performa Kampanye Live (7 Hari)</span>
+                                <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-mono px-2.5 py-1 rounded-full border border-emerald-500/30">Status: Active</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                                <!-- Chart Bars -->
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between text-xs mb-1">
+                                            <span class="text-slate-400">CTR (Click-Through Rate)</span>
+                                            <span class="text-emerald-400 font-bold">3.8% (Sangat Baik)</span>
+                                        </div>
+                                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                                            <div class="bg-emerald-500 h-full rounded-full" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex justify-between text-xs mb-1">
+                                            <span class="text-slate-400">Conversion Rate (CR Pembelian)</span>
+                                            <span class="text-rose-400 font-bold">0.42% (Sangat Rendah!)</span>
+                                        </div>
+                                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                                            <div class="bg-rose-500 h-full rounded-full" style="width: 15%"></div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="flex justify-between text-xs mb-1">
+                                            <span class="text-slate-400">Return on Ad Spend (ROAS)</span>
+                                            <span class="text-amber-400 font-bold">1.05x (Belum Profit)</span>
+                                        </div>
+                                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                                            <div class="bg-amber-500 h-full rounded-full" style="width: 35%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Key Metric Cards -->
+                                <div class="grid grid-cols-2 gap-3 text-center">
+                                    <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
+                                        <span class="text-[10px] text-slate-400 uppercase font-medium">Klik Iklan</span>
+                                        <div class="text-xl font-black text-white mt-1">3.920</div>
+                                        <span class="text-[9px] text-emerald-400">Visual Iklan Menarik</span>
+                                    </div>
+                                    <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
+                                        <span class="text-[10px] text-slate-400 uppercase font-medium">Pembelian</span>
+                                        <div class="text-xl font-black text-rose-400 mt-1">16</div>
+                                        <span class="text-[9px] text-rose-400">Drop-Off Tinggi</span>
+                                    </div>
+                                    <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 col-span-2">
+                                        <span class="text-[10px] text-slate-400 uppercase font-medium">Biaya Per Klik (CPC)</span>
+                                        <div class="text-lg font-extrabold text-white">Rp 382</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Diagnostic Alert Box -->
+                        <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl">
+                            <h4 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                                <i class="fa-solid fa-magnifying-glass-chart text-amber-600"></i>
+                                Diagnosa Problem Kampanye:
+                            </h4>
+                            <p class="text-xs text-amber-800 mt-1 leading-relaxed">
+                                Iklan Anda memiliki <strong>CTR sangat tinggi (3.8%)</strong> yang membuktikan gambar visual & ide pesan ramah lingkungan sangat diminati. Namun, <strong>Conversion Rate (0.42%) sangat buruk</strong>. Pengunjung yang masuk ke landing page batal membeli karena tidak yakin dengan garansi ukuran sepatu atau ragu akan keaslian kualitas bahan daur ulang!
+                            </p>
+                        </div>
+
+                        <div class="flex justify-between pt-4">
+                            <button onclick="goToSimStep(2)" class="bg-slate-200 text-slate-700 px-5 py-2 rounded-xl text-xs font-bold">← Edit Builder</button>
+                            <button onclick="goToSimStep(4)" class="bg-emerald-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-sm hover:bg-emerald-700 flex items-center gap-2">
+                                <span>Pilih Solusi Strategis CRO</span>
+                                <i class="fa-solid fa-lightbulb"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: REKOMENDASI STRATEGI OPTIMASI -->
+                    <div id="sim-step-4" class="sim-step-panel hidden mt-6 space-y-6">
+                        <h3 class="text-lg font-bold text-slate-800">Langkah 4: Rekomendasi Strategi CRO (Conversion Rate Optimization)</h3>
+                        <p class="text-sm text-slate-600">Pilih 2 tindakan optimasi yang paling tepat untuk memperbaiki Conversion Rate toko sepatu eco-friendly ini:</p>
+
+                        <div class="space-y-3">
+                            <label class="flex items-start space-x-3 p-4 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                                <input type="checkbox" name="strategy_opt" value="opt1" class="mt-1 h-4 w-4 text-emerald-600 rounded focus:ring-emerald-500">
+                                <div>
+                                    <span class="font-bold text-sm text-slate-900">Tambahkan Garansi Bebas Risiko "30 Hari Bebas Tukar Size" + Fitur Pembayaran COD (Bayar Di Tempat)</span>
+                                    <p class="text-xs text-slate-500">Menghilangkan ketakutan utama calon pembeli sepatu online terkait salah ukuran atau penipuan barang.</p>
+                                </div>
+                            </label>
+
+                            <label class="flex items-start space-x-3 p-4 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                                <input type="checkbox" name="strategy_opt" value="opt2" class="mt-1 h-4 w-4 text-emerald-600 rounded focus:ring-emerald-500">
+                                <div>
+                                    <span class="font-bold text-sm text-slate-900">Naikkan Budget Biaya Iklan Harian 10x Lipat</span>
+                                    <p class="text-xs text-slate-500">Hanya membakar anggaran iklan tanpa memperbaiki halaman landing page yang bocor.</p>
+                                </div>
+                            </label>
+
+                            <label class="flex items-start space-x-3 p-4 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-all">
+                                <input type="checkbox" name="strategy_opt" value="opt3" class="mt-1 h-4 w-4 text-emerald-600 rounded focus:ring-emerald-500">
+                                <div>
+                                    <span class="font-bold text-sm text-slate-900">Tampilkan Video Ulasan Real & Sertifikasi Uji Ketahanan Bahan Daur Ulang</span>
+                                    <p class="text-xs text-slate-500">Meningkatkan Social Proof dan membuktikan bahwa bahan daur ulang tetap awet & nyaman.</p>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="flex justify-between pt-4 border-t border-slate-100">
+                            <button onclick="goToSimStep(3)" class="bg-slate-200 text-slate-700 px-5 py-2 rounded-xl text-xs font-bold">← Kembali</button>
+                            <button onclick="evaluateSimulatorScore()" class="bg-emerald-600 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-md hover:bg-emerald-700 flex items-center gap-2">
+                                <span>Evaluasi Nilai Praktik</span>
+                                <i class="fa-solid fa-trophy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- TAB 3: KUIS EVALUASI -->
+            <section id="tab-kuis" class="tab-content hidden space-y-6">
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-center pb-4 border-b border-slate-100">
+                        <div>
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-violet-100 text-violet-800 mb-2">Ujian Pemahaman</span>
+                            <h2 class="text-2xl font-bold text-slate-900">Kuis Evaluasi Konseptual & Strategi</h2>
+                            <p class="text-sm text-slate-500 mt-1">Jawablah pertanyaan pilihan ganda di bawah ini dengan tepat.</p>
+                        </div>
+                        <div id="quiz-timer-badge" class="bg-slate-100 px-4 py-2 rounded-xl text-xs font-bold text-slate-700">
+                            ⏱️ Total 5 Pertanyaan
+                        </div>
+                    </div>
+
+                    <!-- Quiz Form Container -->
+                    <div id="quiz-container" class="mt-6 space-y-8">
+                        <!-- Questions will be dynamically populated by JS -->
+                    </div>
+
+                    <div class="mt-8 pt-4 border-t border-slate-100 flex justify-end">
+                        <button onclick="submitQuiz()" class="bg-brand-600 hover:bg-brand-700 text-white px-8 py-3 rounded-xl font-bold text-sm shadow-md transition-all">
+                            Submit Kuis & Hitung Nilai 📝
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: SERTIFIKAT KELULUSAN -->
+            <section id="tab-sertifikat" class="tab-content hidden space-y-6">
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm no-print">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-slate-100">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900">Sertifikat Kelulusan Pembelajaran</h2>
+                            <p class="text-sm text-slate-500 mt-1">Sertifikat resmi kelulusan mata pelajaran Desain Iklan & Strategi E-Commerce.</p>
+                        </div>
+                        <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-print"></i>
+                            <span>Cetak / Unduh Sertifikat (PDF)</span>
+                        </button>
+                    </div>
+
+                    <div class="mt-4 bg-indigo-50 border border-indigo-200 p-4 rounded-xl text-xs text-indigo-900 flex justify-between items-center">
+                        <div>
+                            <strong>Status Kelulusan:</strong> Nilai Kumulatif Anda adalah <span id="cert-status-score" class="font-bold text-brand-600 text-sm">0%</span>.
+                            <p class="text-[11px] text-slate-600 mt-0.5">Lengkapi Kuis dan Workstation Praktik untuk memperbarui nilai resmi pada sertifikat.</p>
+                        </div>
+                        <span id="cert-status-badge" class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full font-bold">Progres Berlangsung</span>
+                    </div>
+                </div>
+
+                <!-- CERTIFICATE DISPLAY TEMPLATE (PRINTABLE) -->
+                <div id="printable-certificate" class="bg-white p-8 md:p-12 rounded-3xl border-8 border-brand-900 shadow-2xl max-w-4xl mx-auto relative overflow-hidden my-6">
+                    <!-- Ornamental Corner Patterns -->
+                    <div class="absolute top-0 left-0 w-24 h-24 bg-brand-600/10 rounded-br-full"></div>
+                    <div class="absolute bottom-0 right-0 w-24 h-24 bg-brand-600/10 rounded-tl-full"></div>
+
+                    <div class="text-center space-y-4 relative z-10">
+                        <!-- Badge Header -->
+                        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-50 border-2 border-brand-600 text-brand-600 font-bold text-2xl mx-auto mb-2 shadow-sm">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        
+                        <h2 class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">Sertifikat Kompetensi Pembelajaran</h2>
+                        <h1 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">SERTIFIKAT KELULUSAN</h1>
+                        <p class="text-xs text-slate-500">Diberikan secara resmi kepada siswa di bawah ini:</p>
+
+                        <!-- Student Name -->
+                        <div class="py-2">
+                            <h3 id="cert-student-name" class="text-2xl md:text-3xl font-extrabold text-brand-900 border-b-2 border-brand-200 inline-block px-8 py-1">
+                                Budi Pratama
+                            </h3>
+                        </div>
+
+                        <p class="text-xs text-slate-600 max-w-xl mx-auto leading-relaxed">
+                            Atas keberhasilan dan penyelesaian tingkat kompetensi praktis dalam mata pelajaran:
+                            <br><strong class="text-slate-800 text-sm">"Desain Iklan Unik Direct Response & Strategi Konversi E-Commerce"</strong>
+                        </p>
+
+                        <!-- Score Details Box -->
+                        <div class="my-6 bg-slate-50 border border-slate-200 rounded-2xl p-4 max-w-md mx-auto grid grid-cols-3 gap-2 text-center">
+                            <div>
+                                <span class="text-[10px] text-slate-500 font-bold uppercase block">Nilai Kuis</span>
+                                <span id="cert-quiz-score-val" class="text-lg font-black text-slate-800">0%</span>
+                            </div>
+                            <div class="border-x border-slate-200">
+                                <span class="text-[10px] text-slate-500 font-bold uppercase block">Nilai Praktik</span>
+                                <span id="cert-sim-score-val" class="text-lg font-black text-slate-800">0%</span>
+                            </div>
+                            <div>
+                                <span class="text-[10px] text-slate-500 font-bold uppercase block">Predikat</span>
+                                <span id="cert-grade-val" class="text-xs font-bold text-emerald-600 block mt-1">Kompeten</span>
+                            </div>
+                        </div>
+
+                        <!-- Footer / Signatures -->
+                        <div class="pt-8 flex justify-between items-end text-left border-t border-slate-200 mt-8 text-xs">
+                            <div>
+                                <p class="text-slate-400 text-[10px]">Tanggal Penerbitan:</p>
+                                <p id="cert-date" class="font-bold text-slate-800">5 November 2026</p>
+                                <div class="mt-2 flex items-center space-x-1 text-[9px] text-slate-400">
+                                    <span>ID Verifikasi:</span>
+                                    <span class="font-mono text-slate-600">EDU-AD-2026-9921</span>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <!-- Signature Area -->
+                                <div class="font-signature text-2xl text-slate-800 font-bold -mb-1">
+                                    A.Rahman
+                                </div>
+                                <div class="w-40 border-b border-slate-400 mx-auto my-1"></div>
+                                <p class="text-[11px] font-extrabold text-slate-800">Guru Pembimbing: A.Rahman, S.Kom., Gr</p>
+                                <p class="text-[9px] text-slate-400">NIP/NPT: 19850412 201101 1 004</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-4 mt-8 no-print">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
+            © 2026 Media Pembelajaran Interaktif Desain Iklan & Strategy E-Commerce. Hak Cipta Dilindungi.
+        </div>
+    </footer>
+
+    <!-- LOGIC & APPLICATION INTERACTION JAVASCRIPT -->
+    <script>
+        // State Storage
+        const state = {
+            studentName: "Budi Pratama",
+            readingCompleted: false,
+            quizCompleted: false,
+            quizScore: 0,
+            simScore: 0,
+            simAudienceChoice: '',
+            builderConfig: {
+                style: "eco",
+                headline: "Tampil Stylish Sekaligus Selamatkan Samudra: Sepatu 100% Eco-Recycled!",
+                urgency: "active",
+                trust: "full",
+                cta: "Pesan Sekarang - Bebas Risiko (Garansi Tukar Size 30 Hari)"
+            }
+        };
+
+        // Quiz Questions Dataset
+        const quizData = [
+            {
+                question: "1. Mengapa teknik 'Pattern Interrupt' sangat krusial dalam merancang visual iklan direct response modern?",
+                options: [
+                    "Agar ukuran file gambar menjadi lebih kecil saat diunggah.",
+                    "Untuk menghentikan gulingan (scroll) audiens dalam 3 detik pertama dengan elemen visual kontras.",
+                    "Agar iklan tampak formal dan persis dengan brosur cetak lama.",
+                    "Untuk menurunkan anggaran biaya iklan menjadi nol rupiah."
+                ],
+                answer: 1,
+                explanation: "Pattern Interrupt berfungsi mendobrak kebiasaan pengguna yang terus menyorot feed media sosial agar perhatian mereka langsung tertuju pada iklan."
+            },
+            {
+                question: "2. Dalam menganalisis data kampanye, apa arti diagnosa jika sebuah iklan memiliki CTR tinggi (3.8%) namun Conversion Rate halaman sangat rendah (0.42%)?",
+                options: [
+                    "Iklannya jelek dan harus segera diganti visualnya.",
+                    "Iklan berhasil menarik perhatian, namun halaman produk mengalami hambatan (friction/kurang dipercaya).",
+                    "Target audiens sudah sangat pas dan tidak perlu diubah.",
+                    "Harga produk terlalu murah bagi audiens."
+                ],
+                answer: 1,
+                explanation: "CTR tinggi menandakan materi iklan sudah menarik. Namun CR rendah menandakan pengunjung kecewa atau ragu setelah mendarat di halaman produk toko online."
+            },
+            {
+                question: "3. Elemen halaman produk e-commerce manakah yang paling efektif untuk menanggulangi rasa ragu (risk) pembeli terhadap ukuran sepatu online?",
+                options: [
+                    "Penggunaan warna tombol hijau terang.",
+                    "Jaminan Garansi 100% Bebas Tukar Size 30 Hari & Fitur Pembayaran COD.",
+                    "Menambahkan teks penjelasan panjang 5.000 kata.",
+                    "Menghapus logo toko."
+                ],
+                answer: 1,
+                explanation: "Risk Reversal seperti Garansi Bebas Tukar Size & COD langsung menghapus rasa takut calon pembeli rugi jika ukuran sepatu tidak pas."
+            },
+            {
+                question: "4. Manakah komponen utama dari formula iklan Direct Response yang berfokus membangun rasa empati terhadap masalah calon pelanggan?",
+                options: [
+                    "Offer",
+                    "Story",
+                    "Discount Coupon",
+                    "Footer Copyright"
+                ],
+                answer: 1,
+                explanation: "Komponen 'Story' dalam formula Hook-Story-Offer menyentuh titik emosi (pain point) audiens agar mereka merasa dipahami."
+            },
+            {
+                question: "5. Pembagian profil audiens berdasarkan gaya hidup, nilai-nilai (seperti eco-conscious), serta ketakutan (pain points) disebut sebagai...",
+                options: [
+                    "Geografis",
+                    "Demografi",
+                    "Psikografi",
+                    "Topografi"
+                ],
+                answer: 2,
+                explanation: "Psikografi mendalami faktor emosional internal seperti motivasi, nilai hidup eco-friendly, dan gaya hidup audiens."
+            }
+        ];
+
+        // Init App On Window Load
+        window.onload = function() {
+            renderQuiz();
+            renderLivePreview();
+            updateOverallProgress();
+            setTodayDate();
+        };
+
+        // Navigation Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(el => {
+                el.classList.remove('bg-brand-50', 'text-brand-700', 'shadow-sm');
+                el.classList.add('text-slate-600');
+            });
+
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            const activeNav = document.getElementById('nav-' + tabId);
+            activeNav.classList.add('bg-brand-50', 'text-brand-700', 'shadow-sm');
+            activeNav.classList.remove('text-slate-600');
+        }
+
+        // Reading Module Topic Accordion
+        function showTopic(topicNum) {
+            document.querySelectorAll('.topic-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.topic-btn').forEach(el => {
+                el.classList.remove('bg-brand-600', 'text-white', 'shadow-sm');
+                el.classList.add('bg-slate-100', 'text-slate-700');
+            });
+
+            document.getElementById('topic-content-' + topicNum).classList.remove('hidden');
+            const activeBtn = document.getElementById('topic-btn-' + topicNum);
+            activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-sm');
+            activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+        }
+
+        function markModuleRead() {
+            state.readingCompleted = true;
+            alert("🎉 Selamat! Anda telah menyelesaikan Modul Bacaan. Silakan melangkah ke Workstation Praktik Simulator.");
+            updateOverallProgress();
+            switchTab('simulator');
+        }
+
+        // Student Name Synchronizer
+        function syncStudentName(val) {
+            state.studentName = val || "Budi Pratama";
+            document.getElementById('cert-student-name').innerText = state.studentName;
+        }
+
+        // Simulator Workstation Steps Nav
+        function goToSimStep(stepNum) {
+            document.querySelectorAll('.sim-step-panel').forEach(el => el.classList.add('hidden'));
+            document.getElementById('sim-step-' + stepNum).classList.remove('hidden');
+
+            for (let i = 1; i <= 4; i++) {
+                const badge = document.getElementById(`sim-step-badge-${i}`);
+                if (i === stepNum) {
+                    badge.className = "px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold";
+                } else {
+                    badge.className = "px-3 py-1.5 rounded-lg text-slate-500 font-medium";
+                }
+            }
+        }
+
+        function updateSimAudienceChoice(val) {
+            state.simAudienceChoice = val;
+            const feedbackEl = document.getElementById('sim-audience-feedback');
+            feedbackEl.classList.remove('hidden');
+
+            if (val === 'correct') {
+                feedbackEl.className = "p-4 rounded-xl text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200";
+                feedbackEl.innerHTML = "✅ <strong>Pilihan Sangat Tepat!</strong> Gen-Z dan Millennial yang peduli lingkungan adalah audiens ideal untuk produk sepatu daur ulang ini. Nilai produk (sustainability & style) sangat sinkron.";
+            } else {
+                feedbackEl.className = "p-4 rounded-xl text-xs font-medium bg-red-50 text-red-800 border border-red-200";
+                feedbackEl.innerHTML = "⚠️ <strong>Kurang Tepat:</strong> Segmen ini tidak relevan dengan daya beli atau nilai utama sepatu casual daur ulang ramah lingkungan.";
+            }
+        }
+
+        // Render Live Preview in E-Commerce Builder
+        function renderLivePreview() {
+            const style = document.getElementById('builder-style').value;
+            const headline = document.getElementById('builder-headline').value;
+            const urgency = document.getElementById('builder-urgency').value;
+            const trust = document.getElementById('builder-trust').value;
+            const cta = document.getElementById('builder-cta').value;
+
+            document.getElementById('preview-headline').innerText = headline;
+            document.getElementById('preview-cta-btn').innerText = cta;
+
+            // Style theme handler
+            const cardBg = document.getElementById('preview-card-bg');
+            if (style === 'bold') {
+                cardBg.className = "mt-4 bg-slate-950 text-white rounded-xl p-4 space-y-4 border border-slate-800 transition-all";
+                document.getElementById('preview-headline').className = "font-extrabold text-sm sm:text-base leading-snug text-emerald-400";
+            } else if (style === 'clean') {
+                cardBg.className = "mt-4 bg-slate-50 text-slate-900 rounded-xl p-4 space-y-4 border border-slate-200 transition-all";
+                document.getElementById('preview-headline').className = "font-extrabold text-sm sm:text-base leading-snug text-slate-900";
+            } else {
+                cardBg.className = "mt-4 bg-emerald-50/40 text-slate-900 rounded-xl p-4 space-y-4 border border-emerald-100 transition-all";
+                document.getElementById('preview-headline').className = "font-extrabold text-sm sm:text-base leading-snug text-slate-900";
+            }
+
+            // Urgency Toggle
+            const urgencyBar = document.getElementById('preview-urgency-bar');
+            if (urgency === 'active') {
+                urgencyBar.classList.remove('hidden');
+            } else {
+                urgencyBar.classList.add('hidden');
+            }
+
+            // Trust Badge Toggle
+            const trustEl = document.getElementById('preview-trust-badge');
+            const badgesFooter = document.getElementById('preview-badges-footer');
+            if (trust === 'full') {
+                trustEl.innerHTML = "★★★★★ <span class='text-slate-500 font-normal'>(850 Ulasan Terverifikasi)</span>";
+                badgesFooter.classList.remove('hidden');
+            } else if (trust === 'minimal') {
+                trustEl.innerHTML = "★★★★☆ <span class='text-slate-500 font-normal'>(14 Ulasan)</span>";
+                badgesFooter.classList.add('hidden');
+            } else {
+                trustEl.innerHTML = "<span class='text-slate-400 font-normal'>Belum ada ulasan</span>";
+                badgesFooter.classList.add('hidden');
+            }
+        }
+
+        function runSimulatedCampaign() {
+            goToSimStep(3);
+        }
+
+        function evaluateSimulatorScore() {
+            const checkedOpts = Array.from(document.querySelectorAll('input[name="strategy_opt"]:checked')).map(el => el.value);
+            
+            let score = 0;
+            if (state.simAudienceChoice === 'correct') score += 40;
+            
+            // Check optimization options
+            if (checkedOpts.includes('opt1')) score += 30;
+            if (checkedOpts.includes('opt3')) score += 30;
+            if (checkedOpts.includes('opt2')) score -= 20; // Penalti untuk keputusan salah
+
+            state.simScore = Math.max(0, score);
+            document.getElementById('sidebar-sim-score').innerText = state.simScore + '%';
+            document.getElementById('cert-sim-score-val').innerText = state.simScore + '%';
+
+            alert(`🏆 Evaluasi Praktik Selesai!\nSkor Praktik Workstation Anda: ${state.simScore}%`);
+            updateOverallProgress();
+            switchTab('kuis');
+        }
+
+        // Render Quiz HTML
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            quizData.forEach((q, idx) => {
+                const qCard = document.createElement('div');
+                qCard.className = "bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3";
+                
+                let optionsHtml = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHtml += `
+                        <label class="flex items-center space-x-3 bg-white p-3 rounded-xl border border-slate-200 hover:border-brand-300 cursor-pointer transition-all text-xs font-medium text-slate-700">
+                            <input type="radio" name="quiz_q_${idx}" value="${optIdx}" class="text-brand-600 focus:ring-brand-500">
+                            <span>${opt}</span>
+                        </label>
+                    `;
+                });
+
+                qCard.innerHTML = `
+                    <h4 class="font-bold text-slate-900 text-sm">${q.question}</h4>
+                    <div class="space-y-2">${optionsHtml}</div>
+                    <div id="quiz-explain-${idx}" class="hidden mt-3 p-3 rounded-xl text-xs font-medium"></div>
+                `;
+                container.appendChild(qCard);
+            });
+        }
+
+        // Submit and Score Quiz
+        function submitQuiz() {
+            let correctCount = 0;
+
+            quizData.forEach((q, idx) => {
+                const selected = document.querySelector(`input[name="quiz_q_${idx}"]:checked`);
+                const explainEl = document.getElementById(`quiz-explain-${idx}`);
+                explainEl.classList.remove('hidden');
+
+                if (selected && parseInt(selected.value) === q.answer) {
+                    correctCount++;
+                    explainEl.className = "mt-3 p-3 rounded-xl text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200";
+                    explainEl.innerHTML = `✅ <strong>Benar!</strong> ${q.explanation}`;
+                } else {
+                    explainEl.className = "mt-3 p-3 rounded-xl text-xs font-medium bg-red-50 text-red-800 border border-red-200";
+                    explainEl.innerHTML = `❌ <strong>Salah.</strong> ${q.explanation}`;
+                }
+            });
+
+            state.quizScore = Math.round((correctCount / quizData.length) * 100);
+            state.quizCompleted = true;
+
+            document.getElementById('sidebar-quiz-score').innerText = state.quizScore + '%';
+            document.getElementById('cert-quiz-score-val').innerText = state.quizScore + '%';
+
+            alert(`📝 Kuis Evaluasi Selesai!\nSkor Anda: ${state.quizScore}% (${correctCount}/${quizData.length} Benar)`);
+            updateOverallProgress();
+        }
+
+        // Calculate Overall Progress & Update Certificate
+        function updateOverallProgress() {
+            let progress = 0;
+            if (state.readingCompleted) progress += 25;
+            if (state.simScore > 0) progress += 35;
+            if (state.quizCompleted) progress += 40;
+
+            document.getElementById('header-progress-bar').style.width = progress + '%';
+            document.getElementById('header-progress-text').innerText = progress + '%';
+
+            // Calculate Final Cumulative Score for Certificate
+            const finalCumulativeScore = Math.round((state.quizScore * 0.5) + (state.simScore * 0.5));
+            document.getElementById('cert-status-score').innerText = finalCumulativeScore + '%';
+
+            // Update Certificate Grade Distinction
+            const gradeEl = document.getElementById('cert-grade-val');
+            const badgeEl = document.getElementById('cert-status-badge');
+
+            if (finalCumulativeScore >= 85) {
+                gradeEl.innerText = "Sangat Memuaskan (Dengan Pujian)";
+                gradeEl.className = "text-xs font-bold text-emerald-600 block mt-1";
+                badgeEl.innerText = "Lulus Dengan Pujian 🌟";
+                badgeEl.className = "px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full font-bold text-xs";
+            } else if (finalCumulativeScore >= 70) {
+                gradeEl.innerText = "Kompeten Baik";
+                gradeEl.className = "text-xs font-bold text-brand-600 block mt-1";
+                badgeEl.innerText = "Lulus Kompeten ✅";
+                badgeEl.className = "px-3 py-1 bg-brand-100 text-brand-800 rounded-full font-bold text-xs";
+            } else {
+                gradeEl.innerText = "Cukup / Perlu Perbaikan";
+                gradeEl.className = "text-xs font-bold text-amber-600 block mt-1";
+                badgeEl.innerText = "Progres Berlangsung ⏳";
+                badgeEl.className = "px-3 py-1 bg-amber-100 text-amber-800 rounded-full font-bold text-xs";
+            }
+        }
+
+        function setTodayDate() {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('cert-date').innerText = today.toLocaleDateString('id-ID', options);
+        }
+    </script>
+</body>
+</html>
